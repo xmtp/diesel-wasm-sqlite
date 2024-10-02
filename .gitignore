@@ -27,3 +27,5 @@ Cargo.lock
 !.yarn/sdks
 !.yarn/versions
 node_modules/**
+.direnv/**
+.envrc
