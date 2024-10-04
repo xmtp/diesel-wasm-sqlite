@@ -2,7 +2,6 @@
 use prelude::*;
 
 use tokio::sync::OnceCell;
-use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 static INIT: OnceCell<()> = OnceCell::const_new();
 

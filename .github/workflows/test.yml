@@ -6,7 +6,7 @@ on:
   pull_request:
     # only run tests when related changes are made
     paths:
-      - ".github/workflows/test-wasm.yml"
+      - ".github/workflows/test.yml"
       - "src/**"
       - "Cargo.toml"
       - "Cargo.lock"
