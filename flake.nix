@@ -43,6 +43,13 @@
             cargo-sweep
             cargo-cache
             cargo-machete
+            cargo-features-manager
+            cargo-bloat
+            cargo-mutants
+            cargo-deny
+            cargo-audit
+            chromedriver
+            geckodriver
           ] ++ lib.optionals isDarwin [
             libiconv
             frameworks.CoreServices
