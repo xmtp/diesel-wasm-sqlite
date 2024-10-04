@@ -311,8 +311,6 @@ async fn can_find() {
     tracing::info!("{changed} rows changed");
 
     let res: Option<StoredBook> = dsl::books.find(1).first(&mut conn).optional().unwrap();
-    tracing::debug!("res: {:?}", res);
-    tracing::debug!("FIND RES: {:?}", res);
 
     let res: Vec<StoredBook> = diesel::sql_query("SELECT * FROM books where (id = 1)")
         .load::<StoredBook>(&mut conn).unwrap();
