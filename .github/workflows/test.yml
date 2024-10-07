@@ -15,7 +15,7 @@ jobs:
   test:
     name: Test
     # running with macos since it contains the safari driver
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
