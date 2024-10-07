@@ -15,7 +15,7 @@ jobs:
   test:
     name: Test
     # running with macos since it contains the safari driver
-    runs-on: warp-ubuntu-latest-x64-16x
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
