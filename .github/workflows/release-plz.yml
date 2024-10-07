@@ -9,7 +9,7 @@ on:
 jobs:
   release-plz:
     name: Release-plz
-    runs-on: warp-ubuntu-latest-x64-8x
+    runs-on: ubuntu-latest
     concurrency:
       group: release-plz-${{ github.ref }}
       cancel-in-progress: false
