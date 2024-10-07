@@ -98,10 +98,12 @@ pub async fn init_sqlite() {
             .expect("Serialization must be infallible for const struct");
             let mem = Memory::new(&js_sys::Object::from(mem))
                 .expect("Wasm Memory could not be instantiated");
+            let proxy_uri = wasm_bindgen::link_to!(module = "/src/js/sqlite3-opfs-async-proxy.js");
+            tracing::debug!("proxy_uri={:?}", proxy_uri);
             let opts = serde_wasm_bindgen::to_value(&Opts {
                 wasm_binary: WASM,
                 wasm_memory: mem,
-                proxy_uri: wasm_bindgen::link_to!(module = "/src/js/sqlite3-opfs-async-proxy.js"),
+                proxy_uri,
             })
             .expect("serialization must be infallible for const struct");
             let opts = Object::from(opts);

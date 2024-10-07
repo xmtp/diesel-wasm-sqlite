@@ -15,7 +15,7 @@ jobs:
   test:
     name: Test
     # running with macos since it contains the safari driver
-    runs-on: warp-macos-13-arm64-6x
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -44,6 +44,7 @@ jobs:
         with:
           workspaces: |
             .
+      - run: cargo build --target wasm32-unknown-unknown --tests --features unsafe-debug-query
       - run: wasm-pack test --headless --safari --features unsafe-debug-query
         working-directory: ./
       - run: wasm-pack test --headless --chrome  --features unsafe-debug-query

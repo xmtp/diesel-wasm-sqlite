@@ -8,7 +8,10 @@ static INIT: OnceCell<()> = OnceCell::const_new();
 pub async fn init() {
     INIT.get_or_init(|| async {
         console::log_1(&"INIT".into());
-        tracing_wasm::set_as_global_default();
+        let config = tracing_wasm::WASMLayerConfigBuilder::default()
+            .set_console_config(tracing_wasm::ConsoleConfig::ReportWithoutConsoleColor)
+            .build();
+        tracing_wasm::set_as_global_default_with_config(config);
         console_error_panic_hook::set_once();
         diesel_wasm_sqlite::init_sqlite().await;
     })

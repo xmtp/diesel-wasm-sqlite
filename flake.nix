@@ -50,6 +50,9 @@
             cargo-audit
             chromedriver
             geckodriver
+
+            nodejs
+            yarn-berry
           ] ++ lib.optionals isDarwin [
             libiconv
             frameworks.CoreServices

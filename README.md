@@ -65,32 +65,56 @@ async fn code_in_web_worker() -> Result<i32, diesel::QueryResult<usize>> {
 
 look in `tests/web.rs` for working example!
 
-## Development
+## Contributing
 
-### Install yarn dependencies
+### Building
+
+#### Install yarn dependencies
 
 `yarn install`
 
-### Build the SQLite/OPFS BUndle
+#### Build the SQLite/OPFS BUndle
 
 `yarn run build`
 
-### Build the rust code, and re-build `package.json` if it changed
+#### Build the rust code, and re-build `package.json` if it changed
 
 `cargo build --target wasm32-unknown-unknown`
 
-### Run Tests
+#### Run Tests
 
 `wasm-pack test --safari --features unsafe-debug-query`
 
 navigate to `http://localhost:8000` to observe test output
 
-### Run Tests (headless)
+#### Run Tests (headless)
 
 `wasm-pack test --safari --headless`
 
-### Setting up the project in VSCode
+#### Setting up the project in VSCode
 
 rust-analyzer does not like crates with different targets in the same workspace.
 If you want this to work well with your LSP, open `diesel-wasm-sqlite` as it's
 own project in VSCode.
+
+### Opening a Pull Request
+
+PR Title should follow
+[conventional commits format](https://www.conventionalcommits.org/en/v1.0.0/)
+
+In short, if should be one of:
+
+- `fix:` represents bug fixes, and results in a SemVer patch bump.
+- `feat:` represents a new feature, and results in a SemVer minor bump.
+- `<prefix>!:` (e.g. feat!:): represents a **breaking change** (indicated by the
+  !) and results in a SemVer major bump.
+- `doc:` documentation changes
+- `perf:` changes related to performance
+- `refactor:` a refactor
+- `style:`
+- `test:`
+
+You can add extra context to conventional commits by using parantheses, for
+instance if a PR touched only database-related code, a PR title may be:
+
+- `feat(db): Add SQLCipher plaintext_header support to database connection`
