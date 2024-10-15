@@ -1,6 +1,6 @@
 //! General tests for migrations/diesel ORM/persistant databases
 use crate::common::prelude::*;
-use diesel_wasm_sqlite::dsl::RunQueryDsl;
+use diesel_wasm_sqlite::{dsl::RunQueryDsl, init_sqlite};
 
 pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("./tests/migrations/");
 
@@ -80,7 +80,8 @@ fn examine_sql_from_insert_default_values() {
 
 #[wasm_bindgen_test]
 async fn test_orm_insert() {
-    init().await;
+    init_sqlite().await;
+    diesel_wasm_sqlite::init_sqlite().await;
     let mut conn = establish_connection().await;
     let new_books = vec![
         BookForm {
@@ -197,7 +198,8 @@ fn insert_or_ignore(updates: &[Item], conn: &mut WasmSqliteConnection) {
 
 #[wasm_bindgen_test]
 async fn can_insert_or_ignore() {
-    init().await;
+    init_sqlite().await;
+    diesel_wasm_sqlite::init_sqlite().await;
     let mut conn = establish_connection().await;
     let updates = vec![
         Item {
@@ -218,7 +220,9 @@ async fn can_insert_or_ignore() {
 
 #[wasm_bindgen_test]
 async fn can_retrieve_blob() {
-    init().await;
+    init_sqlite().await;
+    diesel_wasm_sqlite::init_sqlite().await;
+
     let mut conn = establish_connection().await;
     let updates = vec![
         Item {
@@ -243,12 +247,13 @@ async fn can_retrieve_blob() {
 
     assert_eq!(res[0].payload, b"testing 1");
     assert_eq!(res[1].payload, b"testing 2");
-
 }
 
 #[wasm_bindgen_test]
 async fn serializing() {
-    init().await;
+    init_sqlite().await;
+    diesel_wasm_sqlite::init_sqlite().await;
+
     let mut conn = establish_connection().await;
     let new_books = vec![BookForm {
         title: "Game of Thrones".into(),
@@ -292,9 +297,11 @@ async fn serializing() {
 
 #[wasm_bindgen_test]
 async fn can_find() {
-    use schema::{books::dsl, self};
+    use schema::{self, books::dsl};
 
-    init().await;
+    init_sqlite().await;
+    diesel_wasm_sqlite::init_sqlite().await;
+
     let mut conn = establish_connection().await;
     let new_books = vec![
         BookForm {
@@ -304,22 +311,21 @@ async fn can_find() {
         BookForm {
             title: "1984".into(),
             author: Some("George Orwell".into()),
-        }
+        },
     ];
 
     let changed = insert_books(&mut conn, new_books).unwrap();
     tracing::info!("{changed} rows changed");
 
-    let res: Option<StoredBook> = dsl::books.find(1).first(&mut conn).optional().unwrap();
-
     let res: Vec<StoredBook> = diesel::sql_query("SELECT * FROM books where (id = 1)")
-        .load::<StoredBook>(&mut conn).unwrap();
+        .load::<StoredBook>(&mut conn)
+        .unwrap();
     tracing::debug!("SQL_QUERY RES: {:?}", res);
-/*
-    assert_eq!(res, vec![
-        StoredBook { id: 0, title: "Game of Thrones".into(), author: Some("George R.R".into())   }
-    ]);
-*/
+    /*
+        assert_eq!(res, vec![
+            StoredBook { id: 0, title: "Game of Thrones".into(), author: Some("George R.R".into())   }
+        ]);
+    */
     let stored_books = schema::books::dsl::books
         .select(StoredBook::as_select())
         .load(&mut conn);

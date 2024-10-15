@@ -91,6 +91,8 @@ pub unsafe fn raw_copy_from_sqlite(src: *mut u8, len: u32, buf: &mut [u8]) {
 pub async fn init_sqlite() {
     SQLITE
         .get_or_init(|| async {
+            #[cfg(any(feature = "test-utils", test))]
+            crate::utils::init().await;
             let mem = serde_wasm_bindgen::to_value(&MemoryOpts {
                 initial: 16_777_216 / 65_536,
                 maximum: 2_147_483_648 / 65_536,

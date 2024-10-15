@@ -44,8 +44,8 @@ jobs:
         with:
           workspaces: |
             .
-      - run: cargo build --target wasm32-unknown-unknown --tests --features unsafe-debug-query
-      - run: wasm-pack test --headless --chrome  --features unsafe-debug-query
+      - run: cargo build --target wasm32-unknown-unknown --tests --features test-utils
+      - run: wasm-pack test --headless --chrome  --features test-utils
         working-directory: ./
-      - run: wasm-pack test --headless --firefox --features unsafe-debug-query
+      - run: wasm-pack test --headless --firefox --features test-utils
         working-directory: ./
