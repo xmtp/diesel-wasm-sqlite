@@ -1,0 +1,58 @@
+[package]
+name = "diesel-wasm-sqlite"
+edition = "2021"
+resolver = "2"
+authors = ["XMTP Labs <eng@xmtp.com>"]
+description = "SQLite WebAssembly backend for Diesel"
+homepage = "https://xmtp.org/"
+repository = "https://github.com/xmtp/diesel-wasm-sqlite"
+license = "MIT"
+keywords = ["orm", "database", "sql", "wasm"]
+categories = ["database", "wasm"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+targets = ["wasm32-unknown-unknown"]
+
+[dependencies]
+talc = { workspace = true, default-features = false, features = ["lock_api"] }
+diesel = { workspace = true, features = ["i-implement-a-third-party-backend-and-opt-into-breaking-changes"] }
+diesel_derives.workspace = true
+wasm-bindgen.workspace = true
+wasm-bindgen-futures.workspace = true
+js-sys.workspace = true
+tracing.workspace = true
+tokio = { workspace = true, default-features = false, features = ["sync"] }
+serde = { workspace = true, default-features = false, features = ["derive"] }
+serde-wasm-bindgen.workspace = true
+thiserror.workspace = true
+
+tracing-wasm = { workspace = true, optional = true }
+tracing-subscriber = { workspace = true, features = ["env-filter", "tracing-log"], optional = true }
+web-sys = { workspace = true, features = ["console"], optional = true }
+console_error_panic_hook = { workspace = true, optional = true}
+
+[dev-dependencies]
+wasm-bindgen-test.workspace = true
+console_error_panic_hook = { workspace = true}
+rand.workspace = true
+getrandom = { workspace = true, features = ["js"] }
+web-sys = { workspace = true, features = ["console"] }
+chrono = { workspace = true, features = ["wasmbind", "serde"] }
+diesel_migrations.workspace = true
+diesel = { workspace = true, features = ["chrono"]}
+tracing-wasm = { workspace = true }
+tracing-subscriber = { workspace = true, features = ["env-filter", "tracing-log"] }
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = []
+r2d2 = ["diesel/r2d2"]
+# enables a `DebugQueryWrapper` for diesel
+# but is unsafe because of mem::transmute
+unsafe-debug-query = []
+test-utils = ["unsafe-debug-query", "tracing-wasm", "tracing-subscriber", "console_error_panic_hook", "web-sys"]
+

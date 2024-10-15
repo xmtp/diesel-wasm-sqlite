@@ -35,7 +35,7 @@
             curl
             wasm-pack
             twiggy
-            wasm-bindgen-cli
+            # wasm-bindgen-cli
             binaryen
             linters
             cargo-nextest
