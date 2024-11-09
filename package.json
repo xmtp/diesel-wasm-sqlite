@@ -1,11 +1,16 @@
 {
-  "name": "diesel-wasm-sqlite",
+  "name": "@xmtp/diesel-wasm-sqlite",
   "type": "module",
-  "version": "1.0.0",
-  "description": "",
-  "main": "package.js",
+  "private": true,
+  "version": "0.0.0",
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "test:chrome": "wasm-pack test --chrome --features unsafe-debug-query",
+    "test:chrome:headless": "yarn test:chrome --headless",
+    "test:firefox": "wasm-pack test --firefox --features unsafe-debug-query",
+    "test:firefox:headless": "yarn test:firefox --headless",
+    "test:safari": "wasm-pack test --safari --features unsafe-debug-query",
+    "test:safari:headless": "yarn test:safari --headless"
   },
   "dependencies": {
     "@sqlite.org/sqlite-wasm": "latest"
@@ -15,8 +20,10 @@
     "node": ">=20"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "rollup": "^4.19.0",
-    "rollup-plugin-copy": "^3.5.0"
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.24.4",
+    "rollup-plugin-copy": "^3.5.0",
+    "wasm-pack": "^0.13.1"
   }
 }
