@@ -6,11 +6,11 @@
   "scripts": {
     "build": "rollup -c",
     "test:chrome": "wasm-pack test --chrome --features unsafe-debug-query",
-    "test:chrome:headless": "yarn test:chrome --headless",
+    "test:chrome:headless": "wasm-pack test --chrome --headless --features unsafe-debug-query",
     "test:firefox": "wasm-pack test --firefox --features unsafe-debug-query",
-    "test:firefox:headless": "yarn test:firefox --headless",
+    "test:firefox:headless": "wasm-pack test --firefox --headless --features unsafe-debug-query",
     "test:safari": "wasm-pack test --safari --features unsafe-debug-query",
-    "test:safari:headless": "yarn test:safari --headless"
+    "test:safari:headless": "wasm-pack test --safari --headless --features unsafe-debug-query"
   },
   "dependencies": {
     "@sqlite.org/sqlite-wasm": "latest"
