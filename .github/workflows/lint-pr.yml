@@ -11,7 +11,7 @@ permissions:
 jobs:
   main:
     name: Validate PR title
-    runs-on: warp-ubuntu-latest-x64-16x
+    runs-on: ubuntu-latest
     steps:
       - uses: amannn/action-semantic-pull-request@v5
         env:

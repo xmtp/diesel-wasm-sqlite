@@ -14,12 +14,12 @@ on:
 jobs:
   test:
     name: Test
-    runs-on: warp-macos-latest-arm64-6x
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install Firefox
-        run: brew install --cask firefox
+        run: sudo apt-get update && sudo apt-get install -y firefox
       - name: Update rust toolchains
         run: rustup update
       - name: Cache
