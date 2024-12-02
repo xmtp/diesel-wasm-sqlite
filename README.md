@@ -1,10 +1,10 @@
 # Diesel Backend for SQLite and WASM
 
-### Use SQLite with Diesel ORM in your web apps!
+Use SQLite with Diesel ORM in your web apps!
 
 ## Quickstart
 
-add `diesel-wasm-sqlite` to your project. SQLite is automatically bundled with
+Add `diesel-wasm-sqlite` to your project. SQLite is automatically bundled with
 the library.
 
 ```toml
@@ -63,7 +63,7 @@ async fn code_in_web_worker() -> Result<i32, diesel::QueryResult<usize>> {
 }
 ```
 
-look in `tests/web.rs` for working example!
+Look in `tests/test/web.rs` for a working example!
 
 ## Contributing
 
@@ -71,31 +71,29 @@ look in `tests/web.rs` for working example!
 
 #### Install yarn dependencies
 
-`yarn install`
+`yarn`
 
-#### Build the SQLite/OPFS BUndle
+#### Build the SQLite/OPFS JavaScript Bundle
 
-`yarn run build`
+`yarn build`
 
-#### Build the rust code, and re-build `package.json` if it changed
+#### Build the rust code
 
 `cargo build --target wasm32-unknown-unknown`
 
-#### Run Tests
+#### Run tests (browser)
 
-`wasm-pack test --safari --features unsafe-debug-query`
+- `yarn test:chrome`
+- `yarn test:firefox`
+- `yarn test:safari`
 
-navigate to `http://localhost:8000` to observe test output
+Navigate to `http://localhost:8000` to observe test output.
 
-#### Run Tests (headless)
+#### Run tests (headless)
 
-`wasm-pack test --safari --headless`
-
-#### Setting up the project in VSCode
-
-rust-analyzer does not like crates with different targets in the same workspace.
-If you want this to work well with your LSP, open `diesel-wasm-sqlite` as it's
-own project in VSCode.
+- `yarn test:chrome:headless`
+- `yarn test:firefox:headless`
+- `yarn test:safari:headless`
 
 ### Opening a Pull Request
 

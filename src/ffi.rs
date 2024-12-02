@@ -140,7 +140,7 @@ struct Version {
 }
 
 /// Direct Sqlite3 bindings
-#[wasm_bindgen(module = "/src/js/wa-sqlite-diesel-bundle.js")]
+#[wasm_bindgen(module = "/src/js/sqlite3-diesel.js")]
 extern "C" {
     #[derive(Debug)]
     pub type SQLite;
