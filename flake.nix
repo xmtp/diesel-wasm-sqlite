@@ -9,7 +9,7 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { nixpkgs, flake-utils, fenix, environments, ... }@inputs:
+  outputs = { nixpkgs, flake-utils, fenix, environments, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
@@ -20,7 +20,7 @@
         linters = import "${environments}/linters.nix" { inherit pkgs; };
         rust-toolchain = fenixPkgs.fromToolchainFile {
           file = ./rust-toolchain;
-          sha256 = "sha256-VZZnlyP69+Y3crrLHQyJirqlHrTtGTsyiSnZB8jEvVo=";
+          sha256 = "sha256-s1RPtyvDGJaX/BisLT+ifVfuhDT1nZkZ1NcK8sbwELM=";
         };
         nativeBuildInputs = with pkgs; [ pkg-config ];
         buildInputs = with pkgs;

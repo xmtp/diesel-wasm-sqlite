@@ -29,3 +29,4 @@ Cargo.lock
 node_modules/**
 .direnv/**
 .envrc
+.DS_Store
