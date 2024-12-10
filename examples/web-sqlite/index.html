@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Post Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/brutalist.css" />
+  </head>
+  <body>
+    <div id = "div-wrapper">
+      <H2>Database</h2>
+      <h4>web-sqlite-rs-test-db.db3</h4>
+    </div>
+    <div id="wrapper">
+      <div>
+        <div id = "div-wrapper">
+          <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" class="nb-input default" required>
+          </div>
+          <div>
+            <label for="body">Body:</label>
+            <textarea id="body" class="nb-input default" rows="4" required></textarea>
+          </div>
+          <div>
+            <label for="published">
+              <input type="checkbox" class="nb-checkbox" id="published"> Published
+            </label>
+          </div>
+          <button id="create-post-btn" type="button" class="nb-button blue">Create Post</button>
+        </div>
+      </div>
+      <div>
+        <div id = "div-wrapper">
+          <input type="text" id="post-id" class="nb-input default" required>
+          <button id="delete-post-btn" type="button" class="nb-button blue">Delete Post</button>
+        </div>
+      </div>
+      <div id = "div-wrapper">
+        <button id="list-posts-btn" type="button" class="nb-button blue">List Posts</button>
+      </div>
+      <div id = "div-wrapper">
+        <button id="clear-posts-btn" type="button" class="nb-button blue">Clear</button>
+      </div>
+    </div>
+    <div>
+      <!-- List of Posts -->
+      <div>
+        <h2>Posts</h2>
+        <hr>
+        <div id="posts-container" class="grid"></div>
+      </div>
+    </div>
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>

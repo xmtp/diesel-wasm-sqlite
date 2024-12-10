@@ -4,66 +4,26 @@ Use SQLite with Diesel ORM in your web apps!
 
 ## Quickstart
 
-Add `diesel-wasm-sqlite` to your project. SQLite is automatically bundled with
-the library.
+Add `sqlite-web` to your project. SQLite is automatically bundled with the
+library.
 
 ```toml
 [dependencies]
 diesel = { version = "2.2" }
-diesel-wasm-sqlite = { git = "https://github.com/xmtp/libxmtp", branch = "wasm-backend" }
+sqlite-web = { git = "https://github.com/xmtp/sqlite-web-rs", branch = "main" }
 wasm-bindgen = "0.2"
 ```
 
-```rust
-use diesel_wasm_sqlite::{connection::WasmSqliteConnection, WasmSqlite};
-use wasm_bindgen::prelude::*;
+## Running the Example
 
-pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("./tests/web/migrations/");
+Look in `examples/web-sqlite` for a working example!
 
-mod schema {
-    diesel::table! {
-        books {
-            id -> Integer,
-            title -> Text,
-            author -> Nullable<Text>,
-        }
-    }
-}
-
-
-#[derive(Deserialize, Insertable, Debug, PartialEq, Clone)]
-#[diesel(table_name = books)]
-pub struct BookForm {
-    title: String,
-    author: Option<String>,
-}
-
-// SQLite must be instantiated in a web-worker
-// to take advantage of OPFS
-#[wasm_bindgen]
-async fn code_in_web_worker() -> Result<i32, diesel::QueryResult<usize>> {
-    use schema::books::dsl::*;
-    // `init_sqlite` sets up OPFS and SQLite. It must be ran before anything else, 
-    // or we crash once we start trying to do queries.
-    diesel_wasm_sqlite::init_sqlite().await;
-
-    // create a new persistent SQLite database with OPFS
-    let result = WasmSqliteConnection::establish(&format!("test-{}", rng));
-    let query = insert_into(books).values(vec![
-        BookForm {
-                title: "Game of Thrones".into(),
-                author: Some("George R.R".into()),
-            },
-            BookForm {
-                title: "The Hobbit".into(),
-                author: Some("J.R.R. Tolkien".into()),
-            },
-    ]);
-    Ok(query.execute(conn)?)
-}
-```
-
-Look in `tests/test/web.rs` for a working example!
+- run `yarn` in the root of the repo
+- navigate to `examples/web-sqlite`
+- make sure the [`miniserve`](https://github.com/svenstaro/miniserve) crate is
+  installed locally
+- run `./build.sh && ./run.sh`
+- navigate to `localhost:8080`
 
 ## Contributing
 

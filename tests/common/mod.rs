@@ -13,13 +13,13 @@ pub async fn init() {
             .build();
         tracing_wasm::set_as_global_default_with_config(config);
         console_error_panic_hook::set_once();
-        diesel_wasm_sqlite::init_sqlite().await;
+        sqlite_web::init_sqlite().await;
     })
     .await;
 }
 
 pub async fn connection() -> WasmSqliteConnection {
-    diesel_wasm_sqlite::init_sqlite().await;
+    sqlite_web::init_sqlite().await;
     WasmSqliteConnection::establish(":memory:").unwrap()
 }
 
@@ -36,12 +36,12 @@ pub mod prelude {
         sql_types::{Integer, Nullable, Text},
     };
     pub(crate) use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
-    pub(crate) use diesel_wasm_sqlite::{
+    pub(crate) use sqlite_web::{
         connection::WasmSqliteConnection, WasmSqlite,
     };
     pub(crate) use serde::Deserialize;
     pub(crate) use wasm_bindgen_test::*;
     pub(crate) use web_sys::console;
     #[cfg(feature = "unsafe-debug-query")]
-    pub(crate) use diesel_wasm_sqlite::DebugQueryWrapper;
+    pub(crate) use sqlite_web::DebugQueryWrapper;
 }

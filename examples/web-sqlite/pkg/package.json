@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@sqlite.org/sqlite-wasm": "latest"
+  }
+}

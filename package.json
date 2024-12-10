@@ -1,5 +1,5 @@
 {
-  "name": "@xmtp/diesel-wasm-sqlite",
+  "name": "@xmtp/sqlite-web-rs",
   "type": "module",
   "private": true,
   "version": "0.0.0",
@@ -12,16 +12,17 @@
     "test:safari": "wasm-pack test --safari --features unsafe-debug-query",
     "test:safari:headless": "wasm-pack test --safari --headless --features unsafe-debug-query"
   },
-  "dependencies": {
-    "@sqlite.org/sqlite-wasm": "latest"
-  },
   "packageManager": "yarn@4.5.1",
   "engines": {
     "node": ">=20"
   },
+  "dependencies": {
+    "@sqlite.org/sqlite-wasm": "latest"
+  },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-terser": "^0.4.4",
+    "binaryen": "^120.0.0",
     "rollup": "^4.24.4",
     "rollup-plugin-copy": "^3.5.0",
     "wasm-pack": "^0.13.1"
