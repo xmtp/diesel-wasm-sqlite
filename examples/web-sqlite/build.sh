@@ -1,9 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 
 set -ex
 
 # This example requires to *not* create ES modules, therefore we pass the flag
 # `--target no-modules`
+cd ../../
+yarn
+cd examples/web-sqlite
+
+curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+cargo binstall wasm-bindgen-cli
 
 RUSTFLAGS="-Ctarget-feature=+bulk-memory,+mutable-globals,+reference-types" cargo build \
   --release --target wasm32-unknown-unknown
@@ -18,5 +24,3 @@ if [[ $? -eq 0 ]]; then
 else
     echo "wasm-opt failed"
 fi
- RUST_LOG=info RUSTFLAGS="-Ctarget-feature=+bulk-memory,+mutable-globals" wasm-pack build
- --release --reference-types --no-opt --no-typescript --target web --no-pack
