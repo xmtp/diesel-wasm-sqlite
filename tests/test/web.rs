@@ -1,6 +1,6 @@
 //! General tests for migrations/diesel ORM/persistant databases
 use crate::common::prelude::*;
-use diesel_wasm_sqlite::dsl::RunQueryDsl;
+use sqlite_web::dsl::RunQueryDsl;
 
 pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("./tests/migrations/");
 
@@ -35,7 +35,7 @@ pub struct BookForm {
 }
 
 #[derive(Queryable, QueryableByName, Selectable, PartialEq, Debug)]
-#[diesel(table_name = books, check_for_backend(diesel_wasm_sqlite::WasmSqlite))]
+#[diesel(table_name = books, check_for_backend(sqlite_web::WasmSqlite))]
 pub struct StoredBook {
     #[diesel(sql_type = Integer)]
     id: i32,
@@ -47,7 +47,7 @@ pub struct StoredBook {
 }
 
 async fn establish_connection() -> WasmSqliteConnection {
-    diesel_wasm_sqlite::init_sqlite().await;
+    sqlite_web::init_sqlite().await;
 
     let rng: u16 = rand::random();
     let result = WasmSqliteConnection::establish(&format!("test-{}", rng));

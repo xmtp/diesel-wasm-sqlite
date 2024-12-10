@@ -30,3 +30,4 @@ node_modules/**
 .direnv/**
 .envrc
 .DS_Store
+examples/web-sqlite/pkg/**

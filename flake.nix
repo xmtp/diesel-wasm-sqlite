@@ -33,10 +33,8 @@
             shellcheck
             buf
             curl
-            wasm-pack
             twiggy
-            wasm-bindgen-cli
-            binaryen
+            # binaryen
             linters
             cargo-nextest
             cargo-udeps
@@ -50,6 +48,7 @@
             cargo-audit
             chromedriver
             geckodriver
+            diesel-cli
 
             nodejs
             yarn-berry

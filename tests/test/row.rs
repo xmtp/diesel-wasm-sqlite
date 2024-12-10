@@ -1,10 +1,10 @@
 use crate::common::{connection, prelude::*};
-use diesel_wasm_sqlite::dsl::RunQueryDsl;
+use sqlite_web::dsl::RunQueryDsl;
 
 // test copied from diesel
 #[wasm_bindgen_test]
 async fn fun_with_row_iters() {
-    diesel_wasm_sqlite::init_sqlite().await;
+    sqlite_web::init_sqlite().await;
 
     diesel::table! {
         #[allow(unused_parens)]
