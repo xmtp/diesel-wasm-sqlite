@@ -14,6 +14,11 @@ sqlite-web = { git = "https://github.com/xmtp/sqlite-web-rs", branch = "main" }
 wasm-bindgen = "0.2"
 ```
 
+## Try It Out!
+
+Try out SQLite on the web with rust at this
+[example app](https://sqlite-web-example.netlify.app/)
+
 ## Running the Example
 
 Look in `examples/web-sqlite` for a working example!
